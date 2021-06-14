@@ -1,13 +1,7 @@
-#include "pch.h"
+#include "gtest/gtest.h"
 #include "HttpResponseHeader.h"
 
-// sample
-TEST(TestCaseName, TestName) {
-  EXPECT_EQ(1, 1);
-  EXPECT_TRUE(true);
-}
-
-TEST(HttpResponseHeader_Parse, Get) {
+TEST(HttpResponseHeader_Parse, HTTP1_0) {
 	std::stringstream ss;
 
 	ss << R"(HTTP/1.0)" << ' ' << 200 << ' ' << "OK" << std::endl;
@@ -16,4 +10,17 @@ TEST(HttpResponseHeader_Parse, Get) {
 	int ret = respHeader.parse();
 
 	ASSERT_EQ(0, ret);
+	ASSERT_EQ(HttpResponseHeader::HttpVersion::version_1_0, respHeader.httpVersion());
+}
+
+TEST(HttpResponseHeader_Parse, HTTP1_1) {
+	std::stringstream ss;
+
+	ss << R"(HTTP/1.1)" << ' ' << 200 << ' ' << "OK" << std::endl;
+
+	HttpResponseHeader respHeader(ss);
+	int ret = respHeader.parse();
+
+	ASSERT_EQ(0, ret);
+	ASSERT_EQ(HttpResponseHeader::HttpVersion::version_1_1, respHeader.httpVersion());
 }

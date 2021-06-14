@@ -6,6 +6,7 @@
 
 class HttpResponseHeader
 {
+public:
 	enum class HttpVersion
 	{
 		unknown,
