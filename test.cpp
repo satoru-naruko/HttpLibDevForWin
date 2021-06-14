@@ -11,6 +11,7 @@ TEST(HttpResponseHeader_Parse, HTTP1_0) {
 
 	ASSERT_EQ(0, ret);
 	ASSERT_EQ(HttpResponseHeader::HttpVersion::version_1_0, respHeader.httpVersion());
+	ASSERT_EQ(200, respHeader.statusCode());
 }
 
 TEST(HttpResponseHeader_Parse, HTTP1_1) {
@@ -23,4 +24,5 @@ TEST(HttpResponseHeader_Parse, HTTP1_1) {
 
 	ASSERT_EQ(0, ret);
 	ASSERT_EQ(HttpResponseHeader::HttpVersion::version_1_1, respHeader.httpVersion());
+	ASSERT_EQ(200, respHeader.statusCode());
 }
